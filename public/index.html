@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ketik Gaan</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/select2.min.css"/>
+    <script src="js/select2.min.js"></script>
+    <script type="text/javascript" src="js/caret-position.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/tags.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  
+</head>
+<body>
+    <nav>
+        <div class="nav nav-tabs nav-fill nav-pills" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-index-tab" data-toggle="tab" href="#nav-index" role="tab" aria-controls="nav-index" aria-selected="true"><b>Index</b></a>
+            <a class="nav-item nav-link" id="nav-tags-tab" data-toggle="tab" href="#nav-tags" role="tab" aria-controls="nav-tags" aria-selected="false"><b>Tags</b></a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-index" role="tabpanel" aria-labelledby="nav-index-tab">
+            <nav>
+                <div class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-news-feeding-tab" data-toggle="tab" href="#nav-news" role="tab" aria-controls="nav-news-feeding" aria-selected="true">News Feeding</a>
+                    <a class="nav-item nav-link" id="nav-edit-news-tab" data-toggle="tab" href="#nav-news" role="tab" aria-controls="nav-edit-news-tab" aria-selected="false">Edit News Tags</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-news" role="tabpanel" aria-labelledby="nav-news-feeding-tab">
+                    <div class="container-fluid">
+                        <div class="row top-header">
+                            <div class="col-12">
+                                <div class="title-tab">News Feeding</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 table-container">
+                                <div class="row page-input">
+                                    <form class="form-inline" id="pagination">
+                                            <div class="form-group col-10">
+                                                <input placeholder="Page" type="number" class="form-control" id="page-input" required>
+                                            </div>
+                                            <button id="page-btn" type="submit" class="col-2 btn btn-secondary">Go</button>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-bordered" id="db-ketikgan">
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>Pilih text di bawah lalu tambahkan tags</span>
+                                        <hr>
+                                        <div class="gabung">Tidak ada berita yang di pilih</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b>Selected Text: <span id="selected-text"></span></b>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        Tags: 
+                                    </div> 
+                                    <div class="col-11">
+                                        <select id="tags-multiple" class="form-control" multiple="multiple">
+                                        </select>
+                                        <button id="btn-add-tags" class="btn btn-primary btn-add-tags">Add Tags</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>Tagged Text : </span> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span id="tagged-text"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button id="save-output" class="col-5 btn btn-secondary">Save Output</button>
+                                    <div class="col-2"></div>
+                                    <button id="generate-output" class="col-5 btn btn-secondary" disabled="true">Generate Output</button>
+                                </div>
+                                <div class="row">
+                                    <div class="alert-msg col-md-12" role="alert">
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                    Created by &copy 2018 wamplo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="tab-pane fade" id="nav-tags" role="tabpanel" aria-labelledby="nav-tags-tab">
+            <div class="container-fluid">
+                <div class="row">
+                        <div class="col-12">
+                        <h1  class="text-center">
+                            Insert New Tags
+                        </h1>
+                        </div>
+                </div>
+                <div class="row tag-input-form">
+                    <div class="col-4 offset-md-4">
+                        <form id="add-tag" >
+                                <div class="form-group">
+                                        <label for="tag-input" class="col-2 col-form-label">Tag</label>
+                                        <input type="text" class="form-control" id="tag-input" placeholder="Tag" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag-prefix" class="col-2 col-form-label">Prefix</label>
+                                        <input type="text" class="form-control" id="tag-prefix" placeholder="Prefix" required>
+                                </div>
+                                <div class="form-group">
+                                        <button type="submit" class="col-12 btn btn-primary">Add</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row tag-table-display">
+                    <div class="col-4 offset-md-4">
+                        <table class="table display-tags">
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                            Created by &copy 2018 wamplo
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edit-tags" tabindex="-1" role="dialog" aria-labelledby="edit-tags-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Tags</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                <form>
+                <div class="form-group">
+                    <label for="tag-name-modal" class="col-form-label">Tags:</label>
+                    <input type="text" class="form-control" id="tag-name-modal">
+                </div>
+                <div class="form-group">
+                    <label for="tag-prefix-modal" class="col-form-label">Prefix:</label>
+                    <input type="text" class="form-control" id="tag-prefix-modal"></input>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="save-edit-tags" class="btn btn-primary">Save</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+</body>
+</html>
